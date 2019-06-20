@@ -1,14 +1,7 @@
-import os
-import pandas as pd 
+import pandas as pd
+from auto_batch import batch
 
-data = pd.read_csv('data.csv')
-data.drop(columns={'Unnamed: 0'}, inplace=True)
-data.set_index('Nationality', inplace=True)
+data = pd.read_csv('fifa19_player_data.csv')
+group = data.Nationality
 
-
-os.mkdir('./export')
-
-
-for i in data.index.unique():
-    data[data.index==i].to_csv('export/'+i+'.csv')
-
+batch(data,group)
